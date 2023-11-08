@@ -26,6 +26,7 @@ from rest_framework import permissions
 from django.conf import settings
 
 from Papers.views import PaperView
+from PaperTemplates.views import PaperTemplateViewset
 
 router = DefaultRouter()
 
@@ -37,12 +38,12 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 router.register(r'Paper', PaperView)
+router.register(r'PaperTemplates', PaperTemplateViewset)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0),name='schema-swagger-ui'),
-
 ]
 
 if settings.DEBUG:
